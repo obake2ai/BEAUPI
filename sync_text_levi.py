@@ -97,7 +97,7 @@ def main():
     newest_file = get_random_file(f'/home/pi/sync/')
 
     if newest_file:
-        creation_time = datetime.fromtimestamp(os.path.getctime(newest_file)).strftime("%d/%m/%y(%a) %H:%M:%S")
+        creation_time = datetime.fromtimestamp(os.path.getctime(newest_file)).strftime("%y/%m/%d(%a) %H:%M:%S")
         root = tk.Tk()
         root.overrideredirect(True)
         root.title(f'{creation_time}')
