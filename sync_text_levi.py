@@ -83,6 +83,7 @@ def main():
         # Create a scrolled text area widget with specified font settings
         text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, bg='black', fg='white', font=font_settings)
         text_area.pack(fill=tk.BOTH, expand=True)
+        text_area.configure(yscrollcommand=None)
 
         # フォントオブジェクトを作成して行間隔を設定
         font = tkFont.Font(family='Meiryo', size=font_size)
