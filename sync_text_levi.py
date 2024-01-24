@@ -79,37 +79,40 @@ def main():
     if newest_file:
         root = tk.Tk()
         root.title('New Text File Content')
-        root.attributes('-fullscreen', True)
+
+        # ウィンドウのサイズを取得
+        window_width = root.winfo_screenwidth()
+        window_height = root.winfo_screenheight()
+        root.geometry(f'{window_width}x{window_height}')
         root.configure(bg='black')
 
-        # メインフレームの作成
-        main_frame = tk.Frame(root, bg='black')
-        main_frame.pack(fill=tk.BOTH, expand=True)
+        # フッターの高さを設定
+        footer_height = 30
 
-        # フッターフレームの作成
-        footer_frame = tk.Frame(root, bg='black')
-        footer_frame.pack(side=tk.BOTTOM, fill=tk.X)
+        # テキストエリアの高さを計算
+        text_area_height = window_height - footer_height
 
-        # フォント設定を作成
+        # フォント設定
         font_size = 20
         font_settings = ('Meiryo', font_size)
-        line_spacing = int(font_size * 1.45)  # 行間隔をフォントサイズの145%に設定
 
-        # Create a scrolled text area widget with specified font settings
-        text_area = tk.Text(main_frame, wrap=tk.WORD, bg='black', fg='white', font=font_settings)
-        text_area.pack(fill=tk.BOTH, expand=True)
+        # テキストエリアの設定
+        text_area = tk.Text(root, height=text_area_height, wrap=tk.WORD, bg='black', fg='white', font=font_settings)
+        text_area.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
-        # Read the content of the file and insert it into the text area
+        # フッターラベルの設定
+        footer_label = tk.Label(root, height=footer_height, text="", font=('Meiryo', 8), fg='white', bg='black')
+        footer_label.pack(side=tk.BOTTOM, fill=tk.X)
+
+        # ファイルの内容と作成時間を読み込み
         with open(newest_file, 'r') as file:
             content = file.read()
-            
-        # Get the creation date and time of the newest file
         creation_time = datetime.fromtimestamp(os.path.getctime(newest_file)).strftime("%d/%m/%y(%a) %H:%M:%S")
 
-        # フッターラベルをフッターフレームに追加
-        label = tk.Label(footer_frame, text=creation_time, font=('Meiryo', 8), fg='white', bg='black')
-        label.pack(pady=5)
-        
+        # フッターラベルに作成時間を設定
+        footer_label.config(text=creation_time)
+
+        # テキストエリアにテキストをアニメーション表示
         display_text_animated(content, text_area)
 
         def on_close():
