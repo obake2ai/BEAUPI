@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import scrolledtext
 import sys
 import random
+import tkinter.font as tkFont
 
 os.environ['DISPLAY'] = ':0'
 
