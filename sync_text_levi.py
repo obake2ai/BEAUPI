@@ -6,6 +6,7 @@ import sys
 import random
 import tkinter.font as tkFont
 import re
+from datetime import datetime
 
 os.environ['DISPLAY'] = ':0'
 
