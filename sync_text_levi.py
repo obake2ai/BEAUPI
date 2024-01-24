@@ -53,17 +53,8 @@ def display_text_animated(text, text_area, idx=0):
         # 次の文字の表示までの遅延をランダムに設定
         delay = random.uniform(0.01, 0.3)
 
-        if random.random() < 0.1:
-            # 10%の確率で点滅効果を追加
-            def blink():
-                text_area.delete(f"{tk.END}-1c")
-                text_area.after(int(blink_delay * 1000), lambda: text_area.insert(tk.END, current_char))
-            blink_delay = random.uniform(0.5, 3)
-            text_area.after(int(blink_delay * 1000), blink)
-            delay += blink_delay
-
         # 文字と文字の間のスペースをランダムに設定
-        space_length = random.uniform(0.75, 3)
+        space_length = random.uniform(0.55, 1.1)
         space = ' ' * int(space_length)
         text_area.insert(tk.END, space)
 
