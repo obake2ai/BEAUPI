@@ -94,6 +94,13 @@ def main():
         with open(newest_file, 'r') as file:
             content = file.read()
             
+        # Get the creation date and time of the newest file
+        creation_time = datetime.fromtimestamp(os.path.getctime(newest_file)).strftime("%d/%m/%y(%a) %H:%M:%S")
+
+        # Create a label widget for displaying the creation time
+        label = tk.Label(root, text=creation_time, font=('Meiryo', 8), fg='white', bg='black')
+        label.pack(side=tk.BOTTOM, pady=5)
+        
         display_text_animated(content, text_area)
 
         def on_close():
