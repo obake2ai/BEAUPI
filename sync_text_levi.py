@@ -52,11 +52,11 @@ def display_text_animated(text, text_area, idx=0):
         current_char = text[idx]
         text_area.insert(tk.END, current_char)
 
-        # 英数字の場合は遅延を2.5倍にする
+        # 英数字の場合は遅延を短くする
         if current_char.isalnum():
-            delay = random.uniform(0.01, 0.3) / 2.5
+            delay = random.uniform(0.04, 0.12)  # 英数字の表示速度を早くする
         else:
-            delay = random.uniform(0.01, 0.3)
+            delay = random.uniform(0.1, 0.3)  # 非英数字の表示速度を通常にする
 
         # 文字と文字の間のスペースをランダムに設定
         space_length = random.uniform(1.1, 3.0)
@@ -65,6 +65,7 @@ def display_text_animated(text, text_area, idx=0):
 
         idx += 1
         text_area.after(int(delay * 1000), lambda: display_text_animated(text, text_area, idx))
+
 
 def main():
     # Sync the specified directory
