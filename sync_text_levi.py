@@ -68,6 +68,17 @@ def display_text_animated(text, text_area, idx=0):
         idx += 1
         text_area.after(int(delay * 1000), lambda: display_text_animated(text, text_area, idx))
 
+def custom_title_bar(root, title_text):
+    title_bar = tk.Frame(root, bg="gray", relief="raised", bd=2)
+    title_bar.pack(side="top", fill="x")
+
+    title_label = tk.Label(title_bar, text=title_text, bg="gray", fg="white", font=("Meiryo", 12))
+    title_label.pack(side="left", padx=10)
+
+    close_button = tk.Button(title_bar, text="X", command=root.destroy, bg="gray", fg="white", font=("Meiryo", 12))
+    close_button.pack(side="right", padx=10)
+
+    return title_bar
 
 def main():
     # Sync the specified directory
@@ -79,7 +90,10 @@ def main():
     if newest_file:
         creation_time = datetime.fromtimestamp(os.path.getctime(newest_file)).strftime("%d/%m/%y(%a) %H:%M:%S")
         root = tk.Tk()
+        root.overrideredirect(True)
         root.title(f'{creation_time}')
+
+        custom_title_bar(root, f'{creation_time}')
 
         # ウィンドウのサイズを取得
         window_width = root.winfo_screenwidth()
@@ -94,7 +108,7 @@ def main():
         text_area_height = window_height - footer_height
 
         # フォント設定
-        font_size = 16
+        font_size = 18
         font_settings = ('Meiryo', font_size)
 
         # テキストエリアの設定
