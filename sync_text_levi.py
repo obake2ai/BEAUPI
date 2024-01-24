@@ -77,8 +77,9 @@ def main():
     newest_file = get_random_file(f'/home/pi/sync/')
 
     if newest_file:
+        creation_time = datetime.fromtimestamp(os.path.getctime(newest_file)).strftime("%d/%m/%y(%a) %H:%M:%S")
         root = tk.Tk()
-        root.title('New Text File Content')
+        root.title(f'{creation_time}')
 
         # ウィンドウのサイズを取得
         window_width = root.winfo_screenwidth()
@@ -107,7 +108,6 @@ def main():
         # ファイルの内容と作成時間を読み込み
         with open(newest_file, 'r') as file:
             content = file.read()
-        creation_time = datetime.fromtimestamp(os.path.getctime(newest_file)).strftime("%d/%m/%y(%a) %H:%M:%S")
 
         # フッターラベルに作成時間を設定
         footer_label.config(text=creation_time)
