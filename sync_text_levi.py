@@ -73,11 +73,20 @@ def main():
         root.title('New Text File Content')
         root.attributes('-fullscreen', True)
         root.configure(bg='black')
-        font_settings = ('Meiryo', 20)
+
+        # フォント設定を作成
+        font_size = 20
+        font_settings = ('Meiryo', font_size)
+        line_spacing = int(font_size * 1.45)  # 行間隔をフォントサイズの145%に設定
 
         # Create a scrolled text area widget with specified font settings
         text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, bg='black', fg='white', font=font_settings)
         text_area.pack(fill=tk.BOTH, expand=True)
+
+        # フォントオブジェクトを作成して行間隔を設定
+        font = tkFont.Font(family='Meiryo', size=font_size)
+        text_area.tag_configure("spacing", spacing3=line_spacing)
+        text_area.tag_add("spacing", "1.0", "end")
 
         # Read the content of the file and insert it into the text area
         with open(newest_file, 'r') as file:
