@@ -82,13 +82,21 @@ def main():
         root.attributes('-fullscreen', True)
         root.configure(bg='black')
 
+        # メインフレームの作成
+        main_frame = tk.Frame(root, bg='black')
+        main_frame.pack(fill=tk.BOTH, expand=True)
+
+        # フッターフレームの作成
+        footer_frame = tk.Frame(root, bg='black')
+        footer_frame.pack(side=tk.BOTTOM, fill=tk.X)
+
         # フォント設定を作成
         font_size = 20
         font_settings = ('Meiryo', font_size)
         line_spacing = int(font_size * 1.45)  # 行間隔をフォントサイズの145%に設定
 
         # Create a scrolled text area widget with specified font settings
-        text_area = tk.Text(root, wrap=tk.WORD, bg='black', fg='white', font=font_settings)
+        text_area = tk.Text(main_frame, wrap=tk.WORD, bg='black', fg='white', font=font_settings)
         text_area.pack(fill=tk.BOTH, expand=True)
 
         # Read the content of the file and insert it into the text area
@@ -98,9 +106,9 @@ def main():
         # Get the creation date and time of the newest file
         creation_time = datetime.fromtimestamp(os.path.getctime(newest_file)).strftime("%d/%m/%y(%a) %H:%M:%S")
 
-        # Create a label widget for displaying the creation time
-        label = tk.Label(root, text=creation_time, font=('Meiryo', 8), fg='white', bg='black')
-        label.pack(side=tk.BOTTOM, pady=5)
+        # フッターラベルをフッターフレームに追加
+        label = tk.Label(footer_frame, text=creation_time, font=('Meiryo', 8), fg='white', bg='black')
+        label.pack(pady=5)
         
         display_text_animated(content, text_area)
 
