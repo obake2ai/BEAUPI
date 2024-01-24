@@ -48,7 +48,8 @@ def kill_previous_instances():
 def display_text_animated(text, text_area, idx=0):
     """ テキストを一文字ずつアニメーション表示する関数 """
     if idx < len(text):
-        text_area.insert(tk.END, text[idx])
+        current_char = text[idx]
+        text_area.insert(tk.END, current_char)
         # 次の文字の表示までの遅延をランダムに設定
         delay = random.uniform(0.01, 0.3)
 
@@ -56,14 +57,18 @@ def display_text_animated(text, text_area, idx=0):
             # 10%の確率で点滅効果を追加
             def blink():
                 text_area.delete(f"{tk.END}-1c")
-                text_area.insert(tk.END, text[idx])
+                text_area.after(int(blink_delay * 1000), lambda: text_area.insert(tk.END, current_char))
             blink_delay = random.uniform(0.5, 3)
             text_area.after(int(blink_delay * 1000), blink)
             delay += blink_delay
 
+        # 文字と文字の間のスペースをランダムに設定
+        space_length = random.uniform(0.75, 3)
+        space = ' ' * int(space_length)
+        text_area.insert(tk.END, space)
+
         idx += 1
         text_area.after(int(delay * 1000), lambda: display_text_animated(text, text_area, idx))
-
 
 def main():
     # Sync the specified directory
