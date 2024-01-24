@@ -69,14 +69,23 @@ def display_text_animated(text, text_area, idx=0):
         text_area.after(int(delay * 1000), lambda: display_text_animated(text, text_area, idx))
 
 def custom_title_bar(root, title_text):
-    title_bar = tk.Frame(root, bg="gray", relief="raised", bd=2)
+    title_bar_height = 30  # タイトルバーの高さ
+    title_bar = tk.Frame(root, bg="gray", relief="raised", bd=2, height=title_bar_height)
     title_bar.pack(side="top", fill="x")
 
-    title_label = tk.Label(title_bar, text=title_text, bg="gray", fg="white", font=("Meiryo", 12))
-    title_label.pack(side="left", padx=10)
-
+    # タイトルバーを構成する要素を配置
     close_button = tk.Button(title_bar, text="X", command=root.destroy, bg="gray", fg="white", font=("Meiryo", 12))
     close_button.pack(side="right", padx=10)
+
+    title_label = tk.Label(title_bar, text=title_text, bg="gray", fg="white", font=("Meiryo", 16))
+    title_label.pack(side="left", padx=10)
+
+    # タイトルラベルを中央揃えにするためのスペーサー
+    left_spacer = tk.Frame(title_bar, width=30, bg="gray")
+    left_spacer.pack(side="left")
+
+    right_spacer = tk.Frame(title_bar, width=30, bg="gray")
+    right_spacer.pack(side="right")
 
     return title_bar
 
