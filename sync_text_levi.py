@@ -34,21 +34,23 @@ def get_random_file(path):
         return os.path.join(path, random.choice(text_files))
     return None
 
-# 他の sync_text.py インスタンスを終了させる関数
 def kill_previous_instances():
     try:
-        # 現在のプロセス ID を取得
         current_pid = str(os.getpid())
-        # sync_text.py を名前に含むプロセスの PID をすべて取得
         pids = subprocess.check_output(["pgrep", "-f", "sync_text_levi.py"]).decode().split()
 
-        # 現在のプロセスを除くすべてのプロセスを終了
         for pid in pids:
             if pid != current_pid:
                 os.kill(int(pid), signal.SIGTERM)
     except subprocess.CalledProcessError:
-        # pgrep がプロセスを見つけられない場合は何もしない
         pass
+
+def display_text_animated(text, text_area, idx=0):
+    if idx < len(text):
+        text_area.insert(tk.END, text[idx])
+        idx += 1
+        text_area.after(100, lambda: display_text_animated(text, text_area, idx))
+
 
 def main():
     # Sync the specified directory
@@ -62,7 +64,7 @@ def main():
         root.title('New Text File Content')
         root.attributes('-fullscreen', True)
         root.configure(bg='black')
-        font_settings = ('Meiryo', 20)
+        font_settings = ('Meiryo', 24)
 
         # Create a scrolled text area widget with specified font settings
         text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, bg='black', fg='white', font=font_settings)
@@ -71,7 +73,8 @@ def main():
         # Read the content of the file and insert it into the text area
         with open(newest_file, 'r') as file:
             content = file.read()
-            text_area.insert(tk.INSERT, content)
+            
+        display_text_animated(content, text_area)
 
         def on_close():
             root.destroy()
