@@ -94,7 +94,7 @@ def main():
         text_area_height = window_height - footer_height
 
         # フォント設定
-        font_size = 20
+        font_size = 16
         font_settings = ('Meiryo', font_size)
 
         # テキストエリアの設定
