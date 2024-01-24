@@ -51,8 +51,12 @@ def display_text_animated(text, text_area, idx=0):
     if idx < len(text):
         current_char = text[idx]
         text_area.insert(tk.END, current_char)
-        # 次の文字の表示までの遅延をランダムに設定
-        delay = random.uniform(0.01, 0.3)
+
+        # 英数字の場合は遅延を2.5倍にする
+        if current_char.isalnum():
+            delay = random.uniform(0.01, 0.3) / 2.5
+        else:
+            delay = random.uniform(0.01, 0.3)
 
         # 文字と文字の間のスペースをランダムに設定
         space_length = random.uniform(1.1, 3.0)
