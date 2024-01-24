@@ -55,7 +55,7 @@ def display_text_animated(text, text_area, idx=0):
 
         # 英数字の場合は遅延を短くする（正規表現で判定）
         if re.match('[a-zA-Z0-9]', current_char):
-            delay = random.uniform(0.04, 0.12)  # 英数字の表示速度を早くする
+            delay = random.uniform(0.02, 0.08)  # 英数字の表示速度を早くする
         else:
             delay = random.uniform(0.1, 0.3)  # 非英数字の表示速度を通常にする
 
