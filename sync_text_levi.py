@@ -54,7 +54,7 @@ def display_text_animated(text, text_area, idx=0):
         delay = random.uniform(0.01, 0.3)
 
         # 文字と文字の間のスペースをランダムに設定
-        space_length = random.uniform(0.55, 1.1)
+        space_length = random.uniform(1.1, 3.0)
         space = ' ' * int(space_length)
         text_area.insert(tk.END, space)
 
@@ -73,7 +73,7 @@ def main():
         root.title('New Text File Content')
         root.attributes('-fullscreen', True)
         root.configure(bg='black')
-        font_settings = ('Meiryo', 24)
+        font_settings = ('Meiryo', 20)
 
         # Create a scrolled text area widget with specified font settings
         text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, bg='black', fg='white', font=font_settings)
