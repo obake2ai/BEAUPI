@@ -77,7 +77,7 @@ def custom_title_bar(root, title_text):
     close_button = tk.Button(title_bar, text="X", command=root.destroy, bg="gray", fg="white", font=("Meiryo", 12))
     close_button.pack(side="right", padx=10)
 
-    title_label = tk.Label(title_bar, text=title_text, bg="gray", fg="white", font=("Meiryo", 16))
+    title_label = tk.Label(title_bar, text=title_text, bg="gray", fg="white", font=("Meiryo", 20))
     title_label.pack(side="left", padx=10)
 
     # タイトルラベルを中央揃えにするためのスペーサー
@@ -117,7 +117,7 @@ def main():
         text_area_height = window_height - footer_height
 
         # フォント設定
-        font_size = 18
+        font_size = 22
         font_settings = ('Meiryo', font_size)
 
         # テキストエリアの設定
